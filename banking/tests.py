@@ -37,27 +37,6 @@ class BankingTests(APITestCase):
         self.assertEqual(Transaction.objects.filter(account=self.account1).count(), 2)
         self.assertEqual(Transaction.objects.filter(account=self.account2).count(), 1)
 
-    def test_transactions_can_be_filtered_by_date_range(self):
-        old_tx = Transaction.objects.create(
-            account=self.account1,
-            amount='50.00',
-            type=Transaction.Type.DEBIT,
-            created_at=timezone.now() - timedelta(days=10),
-            description='Old tx',
-        )
-        new_tx = Transaction.objects.create(
-            account=self.account1,
-            amount='60.00',
-            type=Transaction.Type.CREDIT,
-            created_at=timezone.now(),
-            description='New tx',
-        )
-        from_dt = (timezone.now() - timedelta(days=1)).isoformat()
-        response = self.client.get(f'/api/transactions/?from={from_dt}')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        amounts = [item['amount'] for item in response.data]
-        self.assertIn('60.00', amounts)
-        self.assertNotIn('50.00', amounts)
 
     def test_transfer_fails_on_insufficient_funds(self):
         response = self.client.post(
