@@ -1,0 +1,112 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="10">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="select-dropdown" />
+            <item index="7" class="java.lang.String" itemvalue="invalid" />
+            <item index="8" class="java.lang.String" itemvalue="div" />
+            <item index="9" class="java.lang.String" itemvalue="p-datatable" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="aiocontextvars" />
+          <option value="aiodns" />
+          <option value="aiojobs" />
+          <option value="aiocsv" />
+          <option value="aiofiles" />
+          <option value="aiohttp" />
+          <option value="aiohttp-autoreload" />
+          <option value="aiohttp-jinja2" />
+          <option value="aiohttp-security" />
+          <option value="aiohttp-session" />
+          <option value="aiopg" />
+          <option value="aioredis" />
+          <option value="alembic" />
+          <option value="async-timeout" />
+          <option value="asyncssh" />
+          <option value="attrs" />
+          <option value="brotlipy" />
+          <option value="cchardet" />
+          <option value="certifi" />
+          <option value="cffi" />
+          <option value="chardet" />
+          <option value="chirptext" />
+          <option value="click" />
+          <option value="cryptography" />
+          <option value="devtools" />
+          <option value="fabric" />
+          <option value="idna" />
+          <option value="idna-ssl" />
+          <option value="Jinja2" />
+          <option value="Mako" />
+          <option value="MarkupSafe" />
+          <option value="marshmallow" />
+          <option value="multidict" />
+          <option value="passlib" />
+          <option value="psycopg2-binary" />
+          <option value="puchikarui" />
+          <option value="pycares" />
+          <option value="pycparser" />
+          <option value="Pygments" />
+          <option value="PyJWT" />
+          <option value="python-dateutil" />
+          <option value="python-editor" />
+          <option value="pytz" />
+          <option value="pytest" />
+          <option value="pytest-cov" />
+          <option value="redis" />
+          <option value="requests" />
+          <option value="pycryptodome" />
+          <option value="six" />
+          <option value="sentry-sdk" />
+          <option value="SQLAlchemy" />
+          <option value="texttaglib" />
+          <option value="twilio" />
+          <option value="typing" />
+          <option value="typing-extensions" />
+          <option value="urllib3" />
+          <option value="uvloop" />
+          <option value="watchgod" />
+          <option value="WTForms" />
+          <option value="yarl" />
+          <option value="pycountry" />
+          <option value="qrcode" />
+          <option value="ruff" />
+          <option value="black" />
+          <option value="GitPython" />
+          <option value="slack_sdk" />
+          <option value="jira" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="INFORMATION" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E302" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="kaktus.scripts.release_notes.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
