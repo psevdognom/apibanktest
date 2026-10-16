@@ -19,6 +19,11 @@ class TransferSerializer(serializers.Serializer):
     to_account_number = serializers.RegexField(regex=r'^\d{10}$')
     amount = serializers.DecimalField(max_digits=12, decimal_places=2, min_value=0.01)
 
+    def validate_amount(self, amount):
+        if amount <= 0:
+            raise serializers.ValidationError("Amount must be greater than 0")
+        return amount
+
 
 class TransferResponseSerializer(serializers.Serializer):
     message = serializers.CharField()

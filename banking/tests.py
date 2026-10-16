@@ -23,6 +23,16 @@ class BankingTests(APITestCase):
         self.assertEqual(response.data['account_number'], '1111111111')
         self.assertEqual(response.data['balance'], '10000.00')
 
+
+    def test_transfer_to_the_same_account_fails(self):
+        response = self.client.post(
+            '/api/transfers/',
+            {'to_account_number': '1111111111', 'amount': '100.00'},
+            format='json',
+        )
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+
     def test_transfer_endpoint_updates_balances_and_transactions(self):
         response = self.client.post(
             '/api/transfers/',
@@ -36,6 +46,9 @@ class BankingTests(APITestCase):
         self.assertEqual(str(self.account2.balance), '200.00')
         self.assertEqual(Transaction.objects.filter(account=self.account1).count(), 2)
         self.assertEqual(Transaction.objects.filter(account=self.account2).count(), 1)
+        service_account = BankAccount.objects.get(user__is_service_account=True)
+        self.assertEqual(str(service_account.balance), '5.00')
+        self.assertEqual(Transaction.objects.filter(account=service_account).count(), 1)
 
 
     def test_transfer_fails_on_insufficient_funds(self):

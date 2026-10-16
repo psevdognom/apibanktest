@@ -13,7 +13,8 @@ It includes user registration, JWT authentication, account balance, transaction 
 - List transactions with optional `from` / `to` datetime filtering
 - Transfer money between accounts
 - Apply transfer fee: `2.5%` of amount or minimum `€5`
-- Record sender debit and receiver credit transactions
+- Credit transfer fees to a dedicated service account
+- Record sender debit, receiver credit, and service-account fee transactions
 - Atomic balance updates using `transaction.atomic()` and `select_for_update()`
 - OpenAPI schema + Swagger UI + ReDoc via drf-spectacular
 

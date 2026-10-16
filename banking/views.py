@@ -93,6 +93,7 @@ class TransferView(APIView):
             if sender.id == receiver.id:
                 return Response({'detail': 'Cannot transfer to your own account'}, status=status.HTTP_400_BAD_REQUEST)
 
+            service_account = BankAccount.objects.select_for_update().get(user__is_service_account=True)
             fee = calculate_transfer_fee(amount)
             total = quantize_money(amount + fee)
 
@@ -101,8 +102,13 @@ class TransferView(APIView):
 
             sender.balance = quantize_money(sender.balance - total)
             receiver.balance = quantize_money(receiver.balance + amount)
+            if service_account.id == receiver.id:
+                service_account = receiver
+            service_account.balance = quantize_money(service_account.balance + fee)
             sender.save(update_fields=['balance'])
             receiver.save(update_fields=['balance'])
+            if service_account.id != receiver.id:
+                service_account.save(update_fields=['balance'])
 
             Transaction.objects.create(
                 account=sender,
@@ -121,6 +127,12 @@ class TransferView(APIView):
                 amount=amount,
                 type=Transaction.Type.CREDIT,
                 description=f'Transfer from {sender.account_number}',
+            )
+            Transaction.objects.create(
+                account=service_account,
+                amount=fee,
+                type=Transaction.Type.CREDIT,
+                description=f'Transfer fee from {sender.account_number}',
             )
 
         return Response(
