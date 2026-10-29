@@ -34,6 +34,11 @@ cp .env.example .env
 docker compose up --build
 ```
 
+The web container applies migrations before starting Gunicorn with five worker
+processes. All workers connect to the same PostgreSQL service configured by
+`POSTGRES_HOST`, `POSTGRES_NAME`, `POSTGRES_USER`, and the related environment
+variables.
+
 API base URL:
 
 - `http://localhost:8000`
@@ -49,6 +54,24 @@ API base URL:
 ```bash
 docker compose run --rm web python manage.py test
 ```
+
+## Generate concurrent test transfers
+
+Install the project requirements, start the API with `docker compose up`, then run:
+
+```bash
+python scripts/async_transfers.py
+```
+
+The script creates 15 uniquely named test accounts and submits 30 concurrent randomized transfers. Override the defaults with `--base-url`, `--accounts`, `--transfers`, `--concurrency`, `--min-amount`, and `--max-amount`.
+
+To stress simultaneous transfers in both directions between the same two accounts, run:
+
+```bash
+python scripts/opposing_transfers.py --rounds 30 --amount 10.00
+```
+
+Each round releases the two authenticated transfer requests together. Gunicorn distributes concurrent requests among available workers, though the script cannot guarantee which individual workers receive each request.
 
 ## Main endpoints
 
